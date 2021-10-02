@@ -1,0 +1,12 @@
+<ion-list>
+    <p>Ingredients</p>
+    <ng-container *ngFor="let inputs of itemStockDetails">
+        <p *ngIf="(inputs.volume<0)"><b>{{getItemDetails(inputs.sku,'sku')}}</b>&nbsp; Qty:{{(inputs.volume*-1)}}</p>
+    </ng-container>
+</ion-list>
+<ion-list>
+    <p>Result</p>
+    <ng-container *ngFor="let inputs of itemStockDetails">
+        <p *ngIf="(inputs.volume>0)"><b>{{getItemDetails(inputs.sku,'sku')}}</b>&nbsp; Qty:{{(inputs.volume)}}</p>
+    </ng-container>
+</ion-list>

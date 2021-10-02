@@ -1,0 +1,79 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Add Processs Definition</ion-title>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="success" (click)="save()">Save</ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="danger" (click)="back()">Cancel</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-list>
+    <form [formGroup]="processForm">
+      <ion-item [class.invalid]="!processForm.controls.name.valid  && (processForm.controls.name.dirty || submitAttempt)">
+        <ion-label position="floating">Process Name</ion-label>
+        <ion-input type="text" formControlName="name" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.name">
+        <p style="color: #FF0000;" *ngIf="processForm.controls.name.hasError(errors.type)  && (processForm.controls.name.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!processForm.controls.remark.valid  && (processForm.controls.remark.dirty || submitAttempt)">
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea type="text" formControlName="remark" ngDefaultControl></ion-textarea>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.remark">
+        <p style="color: #FF0000;" *ngIf="processForm.controls.remark.hasError(errors.type)  && (processForm.controls.remark.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!processForm.controls.time.valid  && submitAttempt">
+        <ion-label position="floating">Time to complete</ion-label>
+        <ion-input type="number" min="1" max="999" formControlName="time" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.time">
+        <p style="color: #FF0000;" *ngIf="processForm.controls.time.hasError(errors.type)  && (processForm.controls.time.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+    </form>
+    <ion-item>
+      <b>Ingredients</b>
+    </ion-item>
+    <form [formGroup]="ingredientsForm">
+      <ng-container *ngFor="let control of ingredientsForm.controls | keyvalue; let i = index;">
+        <ion-item>
+          <ion-label>Item {{i+1}}</ion-label>
+          <ion-select interface="popover" [formControlName]="control.key" ngDefaultControl (ionChange)="selectIngredientValue($event.target,control.key)">
+            <ion-select-option *ngFor="let item of ItemList" [value]="item.id">{{item.sku}}</ion-select-option>
+          </ion-select>
+          <ion-buttons slot="end">
+            <ion-icon (click)="removeIngredient(control)" style=" zoom: 2.1" *ngIf="i>0" name="close-circle"></ion-icon>
+            <ion-icon (click)="addIngredient()" style=" zoom: 2.1" *ngIf="i==0" name="add-circle"></ion-icon>
+          </ion-buttons>
+        </ion-item>
+      </ng-container>
+      <ion-item *ngIf="ingrediantsFormError && submitAttempt">
+        <p style="color: #FF0000;">Please fill all ingredients</p>
+      </ion-item>
+    </form>
+    <ion-item>
+      <b>Result Items</b>
+    </ion-item>
+    <form [formGroup]="resultItemForm">
+      <ng-container *ngFor="let control of resultItemForm.controls | keyvalue; let i = index;">
+        <ion-item [class.invalid]="!resultItemForm.controls[control.key].valid  && (submitAttempt)">
+          <ion-label>Item {{i+1}}</ion-label>
+          <ion-select interface="popover" [formControlName]="control.key" ngDefaultControl (ionChange)="selectResultItemValue($event.target,control.key)">
+            <ion-select-option *ngFor="let item of ItemList" [value]="item.id">{{item.sku}}</ion-select-option>
+          </ion-select>
+          <ion-buttons slot="end">
+            <ion-icon (click)="removeResultItem(control)" style=" zoom: 2.1" *ngIf="i>0" name="close-circle"></ion-icon>
+            <ion-icon (click)="addResultItem()" style=" zoom: 2.1" *ngIf="i==0" name="add-circle"></ion-icon>
+          </ion-buttons>
+        </ion-item>
+      </ng-container>
+      <ion-item *ngIf="ingrediantsFormError && submitAttempt">
+        <p style="color: #FF0000;">Please fill all result items</p>
+      </ion-item>
+    </form>
+  </ion-list>
+</ion-content>

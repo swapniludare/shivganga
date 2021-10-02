@@ -1,0 +1,62 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>{{(id==null) ? 'Add' : 'Update'}} Inventory</ion-title>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="success" (click)="save()">Save</ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="danger" (click)="back()">Cancel</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-list>
+    <form [formGroup]="inventoryForm">
+      <ion-item [class.invalid]="!inventoryForm.controls.sku.valid  && (inventoryForm.controls.sku.dirty || submitAttempt)">
+        <ng-container *ngIf="id==null">
+          <ion-label position="floating">SKU</ion-label>
+          <ion-input type="text" formControlName="sku" ngDefaultControl (ionChange)="toUpper($event.target,'sku')"></ion-input>
+        </ng-container>
+        <ng-container *ngIf="this.id!=null">
+          <ion-label style="font-weight: Bold;">{{inventoryForm.controls.sku.value}}</ion-label>
+        </ng-container>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.sku">
+        <p style="color: #FF0000;" *ngIf="inventoryForm.controls.sku.hasError(errors.type)  && (inventoryForm.controls.sku.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!inventoryForm.controls.description.valid  && (inventoryForm.controls.description.dirty || submitAttempt)">
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea formControlName="description" ngDefaultControl></ion-textarea>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.description">
+        <p style="color: #FF0000;" *ngIf="inventoryForm.controls.description.hasError(errors.type)  && (inventoryForm.controls.description.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!inventoryForm.controls.rate.valid  && (inventoryForm.controls.rate.dirty || submitAttempt)">
+        <ion-label position="floating">Rate</ion-label>
+          <ion-input type="number" formControlName="rate" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.rate">
+        <p style="color: #FF0000;" *ngIf="inventoryForm.controls.rate.hasError(errors.type)  && (inventoryForm.controls.rate.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!inventoryForm.controls.category.valid  && (inventoryForm.controls.category.dirty || submitAttempt)">
+        <ion-label>Category</ion-label>
+        <ion-select interface="popover" formControlName="category" ngDefaultControl (ionChange)="selectValue($event.target,'category')">
+          <ion-select-option *ngFor="let cat of categoryList" [value]="cat.id">{{cat.category}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.category">
+        <p style="color: #FF0000;" *ngIf="inventoryForm.controls.category.hasError(errors.type)  && (inventoryForm.controls.category.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!inventoryForm.controls.UOM.valid  && (inventoryForm.controls.UOM.dirty || submitAttempt)">
+        <ion-label>UOM</ion-label>
+        <ion-select interface="popover" formControlName="UOM" ngDefaultControl (ionChange)="selectValue($event.target,'UOM')">
+          <ion-select-option *ngFor="let uom of UOMList" [value]="uom.id">{{uom.description}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.UOM">
+        <p style="color: #FF0000;" *ngIf="inventoryForm.controls.UOM.hasError(errors.type)  && (inventoryForm.controls.UOM.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+    </form>
+  </ion-list>
+</ion-content>

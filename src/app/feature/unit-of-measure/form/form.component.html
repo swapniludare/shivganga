@@ -1,0 +1,32 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>{{(id==null) ? 'Add' : 'Update'}} Customer</ion-title>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="success" (click)="save()">Save</ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="danger" (click)="back()">Cancel</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-list>
+    <form [formGroup]="uomForm">
+      <ion-item [class.invalid]="!uomForm.controls.short.valid  && (uomForm.controls.short.dirty || submitAttempt)">
+        <ion-label position="floating">Short Name</ion-label>
+        <ion-input type="text" formControlName="short" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.short">
+        <p style="color: #FF0000;" *ngIf="uomForm.controls.short.hasError(errors.type)  && (uomForm.controls.short.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!uomForm.controls.description.valid  && (uomForm.controls.description.dirty || submitAttempt)">
+        <ion-label position="floating">Description</ion-label>
+        <ion-input type="text" formControlName="description" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.description">
+        <p style="color: #FF0000;" *ngIf="uomForm.controls.description.hasError(errors.type)  && (uomForm.controls.description.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+    </form>
+  </ion-list>
+</ion-content>

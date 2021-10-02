@@ -1,0 +1,25 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Unit Of Measures</ion-title>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="success" (click)="addUom()">Add</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-scroll style="height: 100%">
+    <ion-list>
+      <ion-item *ngFor="let uom of uomList">
+        <ion-label><strong>{{uom.description}}</strong></ion-label>
+        <ion-buttons slot="end">
+          <ion-icon slot="icon-only" name="build" (click)="edit(uom.id)"></ion-icon>&nbsp;&nbsp;
+          <ion-icon slot="icon-only" name="trash" (click)="delete(uom.id)"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+      <ion-item *ngIf="(uomList | json) == '{}'">
+        <ion-label><strong>No Records Found</strong></ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-scroll>
+</ion-content>

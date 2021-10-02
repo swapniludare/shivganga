@@ -1,0 +1,27 @@
+<ion-toolbar>
+  <ion-title>Inventory & Billing System</ion-title>
+</ion-toolbar>
+<p align="center"><img src="../../../../assets/icon/favicon.png" width="150" height="150"></p>
+<ion-content>
+  <form [formGroup]="loginForm">
+  <ion-list>
+    <ion-item [class.invalid]="!loginForm.controls.username.valid  && (loginForm.controls.username.dirty || submitAttempt)">
+      <ion-label position="floating">Username</ion-label>
+      <ion-input type="text" formControlName="username" ngDefaultControl></ion-input>
+    </ion-item>
+    <ng-container *ngFor="let errors of validation_message.username">
+      <p style="color: #FF0000;" *ngIf="loginForm.controls.username.hasError(errors.type)  && (loginForm.controls.username.dirty || submitAttempt)">{{errors.msg}}</p>
+    </ng-container>
+    <ion-item [class.invalid]="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || submitAttempt)">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password" ngDefaultControl></ion-input>
+    </ion-item>
+    <ng-container *ngFor="let errors of validation_message.password">
+      <p style="color: #FF0000;" *ngIf="loginForm.controls.password.hasError(errors.type)  && (loginForm.controls.password.dirty || submitAttempt)">{{errors.msg}}</p>
+    </ng-container>
+  </ion-list>
+</form>
+  <section>
+    <ion-button (click)="login()" color="primary" expand="block" fill="solid">Login</ion-button>
+  </section>
+</ion-content>

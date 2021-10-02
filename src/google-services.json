@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "191600850988",
+    "project_id": "shivganga-f3f50",
+    "storage_bucket": "shivganga-f3f50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191600850988:android:0014f6b7a341a146763989",
+        "android_client_info": {
+          "package_name": "com.shivganga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191600850988-m6cg8jencriop5ns0u2lfke4gihtf5ka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwVWcxZxkcjTyKwmBv-UfDTOhZS098j2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191600850988-m6cg8jencriop5ns0u2lfke4gihtf5ka.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

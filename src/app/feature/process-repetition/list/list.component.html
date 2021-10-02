@@ -1,0 +1,47 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Processes</ion-title>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="success" (click)="addProcessRep()">Add</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-scroll style="height: 100%">
+    <ion-list>
+        <ng-container *ngFor="let processRepetition of processRepetitionList">
+          <ion-card *ngIf="processRepetition">
+            <ion-card-header>
+              <ion-card-title>
+                {{getProcessElements(processRepetition.process, 'name')}}
+              </ion-card-title>
+              <ion-card-subtitle>
+                {{getProcessElements(processRepetition.process, 'remark')}}
+              </ion-card-subtitle>
+              <ion-card-subtitle>
+                Started on {{processRepetition.start.toDate() | date:'dd-MM-yy h:mm a'}}
+              </ion-card-subtitle>
+              <ion-card-subtitle *ngIf="processRepetition.end==null">
+                Estimated Completion Time: <app-timer [start]="processRepetition.start" [process]="processes" [id]="processRepetition.process"></app-timer>
+              </ion-card-subtitle>
+              <ion-card-subtitle *ngIf="processRepetition.end!=null">
+                Ended on {{processRepetition.end.toDate() | date:'dd-MM-yy h:mm a'}}
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <app-stock-list [processRepetitionId]="processRepetition.id" [ItemList]="ItemList"></app-stock-list>
+              <ng-container *ngIf="processRepetition.end==null">
+                <ion-buttons slot="start">
+                  <ion-button color="primary" fill="solid" (click)="openCompletionForm(processRepetition.id,processRepetition.process)">Complete Task</ion-button>
+                </ion-buttons>
+              </ng-container>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+        <ion-item *ngIf="(processRepetitionList | json) == '{}'">
+          <ion-label><strong>No Records Found</strong></ion-label>
+        </ion-item>
+    </ion-list>
+  </ion-scroll>
+</ion-content>

@@ -1,0 +1,25 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Users</ion-title>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="success" (click)="addUser()">Add</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-scroll style="height: 100%">
+    <ion-list>
+      <ion-item *ngFor="let user of userList">
+        <ion-label><strong>{{user.first_name}} {{user.last_name}}</strong></ion-label>
+        <ion-buttons slot="end">
+          <ion-icon slot="icon-only" name="build" (click)="edit(user.id)"></ion-icon>&nbsp;&nbsp;
+          <ion-icon slot="icon-only" name="trash" *ngIf="!user.admin" (click)="delete(user.id)"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+      <ion-item *ngIf="(userList | json) == '{}'">
+        <ion-label><strong>No Records Found</strong></ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-scroll>
+</ion-content>

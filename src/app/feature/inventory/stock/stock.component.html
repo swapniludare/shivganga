@@ -1,0 +1,36 @@
+<ion-content>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{item.sku}}</ion-title>
+  </ion-toolbar>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{item.description}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      Stock : {{item.stock}}
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <form [formGroup]="stockForm">
+      <ion-item [class.invalid]="!stockForm.controls.volume.valid  && (stockForm.controls.volume.dirty || submitAttempt)">
+        <ion-label position="floating">Volume</ion-label>
+        <ion-input type="number" formControlName="volume" ngDefaultControl></ion-input>
+        <ion-buttons slot="end">
+          <ion-button fill="solid" color="secondary" (click)="updateStock()">Update</ion-button>
+        </ion-buttons>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.volume">
+        <p style="color: #FF0000;" *ngIf="stockForm.controls.volume.hasError(errors.type)  && (stockForm.controls.volume.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+    </form>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let stk of stock">
+      <ion-label style="font-size: small;" *ngIf="stk.volume>0"><b *ngIf="stk.processRepId!=null">(Process)</b> Stock <b>{{stk.volume}}</b> added on <b>{{stk.date.toDate() | date:'dd-MM-yy h:mm a'}}</b> by {{stk.user}}</ion-label>
+      <ion-label style="font-size: small;" *ngIf="stk.volume<0"><b *ngIf="stk.processRepId!=null">(Process)</b> {{stk.user}} took <b>{{(stk.volume*-1)}}</b> on <b>{{stk.date.toDate() | date:'dd-MM-yy h:mm a'}}</b></ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

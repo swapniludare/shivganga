@@ -1,0 +1,50 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>{{(id==null) ? 'Add' : 'Update'}} User</ion-title>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="success" (click)="save()">Save</ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="danger" (click)="back()">Cancel</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-list>
+    <form [formGroup]="userForm">
+      <ion-item [class.invalid]="!userForm.controls.first_name.valid  && (userForm.controls.first_name.dirty || submitAttempt)">
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input type="text" formControlName="first_name" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.first_name">
+        <p style="color: #FF0000;" *ngIf="userForm.controls.first_name.hasError(errors.type)  && (userForm.controls.first_name.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!userForm.controls.last_name.valid  && (userForm.controls.last_name.dirty || submitAttempt)">
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input type="text"  formControlName="last_name" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.last_name">
+        <p style="color: #FF0000;" *ngIf="userForm.controls.last_name.hasError(errors.type)  && (userForm.controls.last_name.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!userForm.controls.username.valid  && (userForm.controls.username.dirty || submitAttempt)">
+        <ion-label position="floating">Username</ion-label>
+        <ion-input type="text" formControlName="username" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.username">
+        <p style="color: #FF0000;" *ngIf="userForm.controls.username.hasError(errors.type)  && (userForm.controls.username.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!userForm.controls.password.valid  && (userForm.controls.password.dirty || submitAttempt)">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" formControlName="password" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.password">
+        <p style="color: #FF0000;" *ngIf="userForm.controls.password.hasError(errors.type)  && (userForm.controls.password.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item>
+        <ion-label>Admin</ion-label>
+        <ion-toggle slot="end" formControlName="admin" ngDefaultControl></ion-toggle>
+      </ion-item>
+    </form>
+  </ion-list>
+</ion-content>

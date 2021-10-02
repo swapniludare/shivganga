@@ -1,0 +1,81 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>{{(this.id=='') ? 'Add' : 'Update'}} Customer</ion-title>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="success" (click)="save()">Save</ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="danger" (click)="back()">Cancel</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-list>
+    <form [formGroup]="customerForm">
+      <ion-item [class.invalid]="!customerForm.controls.first_name.valid  && (customerForm.controls.first_name.dirty || submitAttempt)">
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input type="text" formControlName="first_name" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.first_name">
+        <p style="color: #FF0000;" *ngIf="customerForm.controls.first_name.hasError(errors.type)  && (customerForm.controls.first_name.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!customerForm.controls.last_name.valid  && (customerForm.controls.last_name.dirty || submitAttempt)">
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input type="text" formControlName="last_name" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.last_name">
+        <p style="color: #FF0000;" *ngIf="customerForm.controls.last_name.hasError(errors.type)  && (customerForm.controls.last_name.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!customerForm.controls.phone.valid  && (customerForm.controls.phone.dirty || submitAttempt)">
+        <ion-label position="floating">Phone</ion-label>
+        <ion-input type="number" formControlName="phone" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.phone">
+        <p style="color: #FF0000;" *ngIf="customerForm.controls.phone.hasError(errors.type)  && (customerForm.controls.phone.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!customerForm.controls.delivery.valid  && (customerForm.controls.delivery.dirty || submitAttempt)">
+        <ion-label position="floating">Delivery Charge</ion-label>
+        <ion-input type="number" formControlName="delivery" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.delivery">
+        <p style="color: #FF0000;" *ngIf="customerForm.controls.delivery.hasError(errors.type)  && (customerForm.controls.delivery.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!customerForm.controls.address_line.valid  && (customerForm.controls.address_line.dirty || submitAttempt)">
+        <ion-label position="floating">Address</ion-label>
+        <ion-textarea formControlName="address_line" ngDefaultControl></ion-textarea>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.address_line">
+        <p style="color: #FF0000;" *ngIf="customerForm.controls.address_line.hasError(errors.type)  && (customerForm.controls.address_line.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!customerForm.controls.area.valid  && (customerForm.controls.area.dirty || submitAttempt)">
+        <ion-label position="floating">Area</ion-label>
+        <ion-input type="text" formControlName="area" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.area">
+        <p style="color: #FF0000;" *ngIf="customerForm.controls.area.hasError(errors.type)  && (customerForm.controls.area.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!customerForm.controls.city.valid  && (customerForm.controls.city.dirty || submitAttempt)">
+        <ion-label position="floating">City</ion-label>
+        <ion-input type="text" formControlName="city" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.city">
+        <p style="color: #FF0000;" *ngIf="customerForm.controls.city.hasError(errors.type)  && (customerForm.controls.city.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!customerForm.controls.state.valid  && (customerForm.controls.state.dirty || submitAttempt)">
+        <ion-label position="floating">State</ion-label>
+        <ion-input type="text" formControlName="state" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.state">
+        <p style="color: #FF0000;" *ngIf="customerForm.controls.state.hasError(errors.type)  && (customerForm.controls.state.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+      <ion-item [class.invalid]="!customerForm.controls.zip.valid  && (customerForm.controls.zip.dirty || submitAttempt)">
+        <ion-label position="floating">Zip</ion-label>
+        <ion-input type="number" formControlName="zip" ngDefaultControl></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let errors of validation_message.zip">
+        <p style="color: #FF0000;" *ngIf="customerForm.controls.zip.hasError(errors.type)  && (customerForm.controls.zip.dirty || submitAttempt)">{{errors.msg}}</p>
+      </ng-container>
+    </form>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,21 @@
+<ion-content>
+  <form [formGroup]="completeForm">
+    <ion-list>
+      <ion-list-header>
+        <ion-label style="font-size: larger; font-weight: bolder;">Completion Form</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let item of outputValues">
+        <b>{{getItemDetails(item.sku,'sku')}} : </b>&nbsp;&nbsp;<ion-input type="number" min="1" max="99999" [formControlName]="item.sku" ngDefaultControl></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!completeForm.valid && submitAttempt">
+        <p style="color: red;">Please fill form correctly</p>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-buttons slot="start">
+        <ion-button color="success" (click)="complete()" fill="solid">Complete</ion-button>
+        <ion-button color="danger" (click)="dismiss()" fill="solid">Cancle</ion-button>
+      </ion-buttons>
+    </ion-list>
+  </form>
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Processs Definition</ion-title>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="success" (click)="addprocess()">Add</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-scroll style="height: 100%">
+    <ion-list>
+        <ion-card *ngFor="let process of processList">
+          <ion-card-header>
+            <ion-card-title>
+              {{process.name}}
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{process.remark}}</p>
+            <p>Time to Complete: {{process.time/3600000}}</p>
+            <ion-buttons slot="end">
+              <ion-icon slot="icon-only" name="trash" (click)="delete(process.id)" style="zoom:1.2;color:black"></ion-icon>
+            </ion-buttons>
+          </ion-card-content>
+        </ion-card>
+        <ion-item *ngIf="(processList | json) == '{}'">
+          <ion-label><strong>No Records Found</strong></ion-label>
+        </ion-item>
+    </ion-list>
+  </ion-scroll>
+</ion-content>

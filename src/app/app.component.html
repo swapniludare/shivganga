@@ -1,0 +1,30 @@
+<ion-app>
+  <ng-container *ngIf="isLoggedIn | async">
+  <ion-menu side="start" menuId="first" contentId="main" swipe-gesture="true">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+      <ion-content>
+        <ion-menu-toggle>
+          <ion-list>
+            <ion-item [routerLink]="['/dashboard']" menuClose>Dashboard</ion-item>
+            <ion-item [routerLink]="['/order']" menuClose>Enter Order</ion-item>
+            <ion-item [routerLink]="['/dashboard']" menuClose>Generate Bills</ion-item>
+            <ion-item [routerLink]="['/inventory']" menuClose>Inventory</ion-item>
+            <ion-item [routerLink]="['/process-repetition']" menuClose>Processes</ion-item>
+            <ion-item [routerLink]="['/categories']" menuClose>Item Categories</ion-item>
+            <ion-item [routerLink]="['/uoms']" menuClose>Unit Of Measure</ion-item>
+            <ion-item [routerLink]="['/customers']" menuClose>Customers</ion-item>
+            <ion-item [routerLink]="['/users']" menuClose>Users</ion-item>
+            <ion-item [routerLink]="['/dashboard']" menuClose>Reports</ion-item>
+            <ion-item [routerLink]="['/settings']" menuClose>Settings</ion-item>
+            <ion-item (click)="logout()" menuClose>Logout</ion-item>
+          </ion-list>
+        </ion-menu-toggle>
+      </ion-content>
+  </ion-menu>
+</ng-container>
+  <ion-router-outlet  id="main"></ion-router-outlet>
+</ion-app>
